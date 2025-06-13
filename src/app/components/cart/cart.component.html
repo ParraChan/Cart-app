@@ -4,7 +4,8 @@
                 <h5 class="card-title">Carro de compras</h5>
             </div>
             <div class="card-body">
-                <table class="table table-hover table-striped">
+                @if (items.length>0) {
+                      <table class="table table-hover table-striped">
                     <thead>
                         <tr>
                             <th>Producto</th>
@@ -35,6 +36,10 @@
                         </tr>
                     </tfoot>
                 </table>
+                }@else {
+                    <div class="alert alert-warning"> El carro esta vacio</div>
+                }
+              
                     
 
                     <!---   <button class="btn btn-secondary float-end btn-sm"
