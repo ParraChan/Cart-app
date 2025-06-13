@@ -5,11 +5,10 @@ import { CatalogComponent } from './catalog/catalog.component';
 import { CartComponent } from './cart/cart.component';
 import { CartItem } from '../models/cartItem';
 import { NavbarComponent } from './navbar/navbar.component';
-import { CartModalComponent } from './cart-modal/cart-modal.component';
 
 @Component({
   selector: 'cart-app',
-  imports: [CatalogComponent,CartModalComponent, NavbarComponent],
+  imports: [CatalogComponent, NavbarComponent],
   templateUrl: './cart-app.component.html'
 })
 export class CartAppComponent implements OnInit {
@@ -18,9 +17,7 @@ export class CartAppComponent implements OnInit {
 
   items: CartItem[] = [];
 
-  //total : number =0;
-
-  showCart: boolean=false;
+  total : number =0;
   
   constructor(private service: ProductService){
 
@@ -29,7 +26,7 @@ export class CartAppComponent implements OnInit {
    this.products= this.service.findAll();
    
    this.items= JSON.parse(sessionStorage.getItem('cart') || '[]');
-   //this.caculateTotal();
+   this.caculateTotal();
   }
 
   onAddCart(product: Product): void {
@@ -47,28 +44,24 @@ export class CartAppComponent implements OnInit {
     } else {
       this.items = [... this.items, { product: { ...product }, quantity: 1 }];
     }
-   // this.caculateTotal();
-    //this.saveSession();
+    this.caculateTotal();
+    this.saveSession();
   }
   onDeleteCart(id: number): void {
     this.items = this.items.filter(item => item.product.id !== id);
     if(this.items.length== 0){
       sessionStorage.removeItem('cart');
-    //  sessionStorage.clear();
+      sessionStorage.clear();
     }
-    //this.caculateTotal();
-    //this.saveSession();
+    this.caculateTotal();
+    this.saveSession();
   }
-  /*
+  
   caculateTotal():void{
     this.total= this.items.reduce((accumulator, item)=>
     accumulator + item.product.price * item.quantity,0);
   }
   saveSession():void{
     sessionStorage.setItem('cart',JSON.stringify(this.items))
-  }*/
-  openCloseCart(){
-    this.showCart= !this.showCart;
-
   }
 }
