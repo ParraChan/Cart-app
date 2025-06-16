@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { CatalogComponent } from './catalog/catalog.component';
 import { CartItem } from '../models/cartItem';
 import { NavbarComponent } from './navbar/navbar.component';
 import { Router, RouterOutlet } from '@angular/router';
@@ -8,12 +7,12 @@ import Swal from 'sweetalert2';
 import { Store } from '@ngrx/store';
 import { ItemsState } from '../store/items.reducer';
 import { add, remove, total } from '../store/items.actions';
-import { ChangeDetectorRef } from '@angular/core';
+//import { ChangeDetectorRef } from '@angular/core';
 
 @Component({
   selector: 'cart-app',
   standalone: true,
-  imports: [CatalogComponent, NavbarComponent, RouterOutlet],
+  imports: [ NavbarComponent, RouterOutlet],
   templateUrl: './cart-app.component.html'
 })
 export class CartAppComponent implements OnInit {
