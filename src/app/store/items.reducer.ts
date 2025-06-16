@@ -2,14 +2,14 @@ import { createReducer, on } from "@ngrx/store";
 import { CartItem } from "../models/cartItem";
 import { add, remove, total } from "./items.actions";
 
-export interface ItemsState{
-    items : CartItem[],
-    total : number
+export interface ItemsState {
+    items: CartItem[],
+    total: number
 }
 
 export const initialState: ItemsState = {
     items: JSON.parse(sessionStorage.getItem('cart') || '[]'),
-    total:0,
+    total: 0,
 }
 
 export const itemsReducer = createReducer(
