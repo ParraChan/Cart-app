@@ -23,7 +23,7 @@ export class CartAppComponent implements OnInit {
   constructor(
     private store: Store<{ items: ItemsState }>,
     private router: Router,
-    private cdr: ChangeDetectorRef,
+   // private cdr: ChangeDetectorRef,
     private sharingDataService: SharingDataService) {
     this.store.select('items').subscribe(state => {
       this.items = state.items;
@@ -68,8 +68,10 @@ export class CartAppComponent implements OnInit {
 
           this.store.dispatch(remove({ id }));
           this.store.dispatch(total());
-          this.cdr.detectChanges();
-          this.router.navigate(['/cart']);
+        //  this.cdr.detectChanges();
+          this.router.navigateByUrl('/', { skipLocationChange: true }).then(() => {
+         this.router.navigate(['/cart']);
+          });
 
           Swal.fire({
             title: "Eliminado!",
